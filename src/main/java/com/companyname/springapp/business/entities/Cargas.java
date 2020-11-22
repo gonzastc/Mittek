@@ -19,19 +19,19 @@ public class Cargas {
 	
 	
     @Column(name = "Alto")	
-	private float Alto;
+	private Integer Alto;
 	
 	
     @Column(name = "Ancho")		
-	private float Ancho;
+	private Integer Ancho;
 	
 	
     @Column(name = "Largo")		
-	private float Largo;
+	private Integer Largo;
 	
 	
     @Column(name = "Peso")		
-	private float Peso;
+	private Integer Peso;
 	
 	
     @Column(name = "Descripcion")		
@@ -51,49 +51,49 @@ public class Cargas {
 
 
 
-	public float getAlto() {
+	public Integer getAlto() {
 		return Alto;
 	}
 
 
 
-	public void setAlto(float alto) {
+	public void setAlto(Integer alto) {
 		Alto = alto;
 	}
 
 
 
-	public float getAncho() {
+	public Integer getAncho() {
 		return Ancho;
 	}
 
 
 
-	public void setAncho(float ancho) {
+	public void setAncho(Integer ancho) {
 		Ancho = ancho;
 	}
 
 
 
-	public float getLargo() {
+	public Integer getLargo() {
 		return Largo;
 	}
 
 
 
-	public void setLargo(float largo) {
+	public void setLargo(Integer largo) {
 		Largo = largo;
 	}
 
 
 
-	public float getPeso() {
+	public Integer getPeso() {
 		return Peso;
 	}
 
 
 
-	public void setPeso(float peso) {
+	public void setPeso(Integer peso) {
 		Peso = peso;
 	}
 
@@ -111,7 +111,7 @@ public class Cargas {
 
 
 
-	public Cargas(Integer idCarga, float alto, float ancho, float largo, float peso, String descripcion) {
+	public Cargas(Integer idCarga, Integer alto, Integer ancho, Integer largo, Integer peso, String descripcion) {
 		super();
 		this.idCarga = idCarga;
 		Alto = alto;

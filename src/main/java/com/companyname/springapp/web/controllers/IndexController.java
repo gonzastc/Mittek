@@ -13,19 +13,25 @@ import com.companyname.springapp.business.services.PrestamoManager;
 @Controller
 public class IndexController {
     
-	@Autowired 
-	private PrestamoManager prestamoManager;
-	
-    @RequestMapping(value="/home")
-    public ModelAndView handleRequest() {
-      
-    	Map<String, Object> myModel = new HashMap<String, Object>();
-    	myModel.put("prestamosvencidos", prestamoManager.getPrestamosVencidos());
-	    myModel.put("prestamosvigentes", prestamoManager.getPrestamosVigentes());
-    	
-    	return new ModelAndView("home", "model", myModel);
-    }
+	/*
+	 * @Autowired private PrestamoManager prestamoManager;
+	 * 
+	 * @RequestMapping(value="/home") public ModelAndView handleRequest() {
+	 * 
+	 * Map<String, Object> myModel = new HashMap<String, Object>();
+	 * myModel.put("prestamosvencidos", prestamoManager.getPrestamosVencidos());
+	 * myModel.put("prestamosvigentes", prestamoManager.getPrestamosVigentes());
+	 * 
+	 * return new ModelAndView("home", "model", myModel); }
+	 */
     
     
+	@RequestMapping(value="/home")
+	public ModelAndView handleRequest() {
+		
+		ModelAndView mv = new ModelAndView("home");
+		
+		return mv;
+	}
 }
 

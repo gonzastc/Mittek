@@ -1,5 +1,7 @@
 package com.companyname.springapp.business.services;
 
-public interface VehiculoManager {
+import com.companyname.springapp.business.entities.Vehiculo;
 
+public interface VehiculoManager {
+	void insertar (Vehiculo vehiculo);
 }
