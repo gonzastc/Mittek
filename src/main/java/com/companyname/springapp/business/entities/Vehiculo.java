@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name="vehiculos")
 
@@ -20,15 +22,13 @@ public class Vehiculo {
 	@Id
     @Column(name = "idVehiculo")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GenericGenerator(name = "native",strategy = "native")
 	private Integer idVehiculo;
 	
 	@ManyToOne
 	@JoinColumn(name = "idTipo_Vehiculo")
 	private TipoVehiculos tipoVehiculo;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_Transportista")
-	private Transportista transportista;
 	
 	@Column(name = "Marca")
 	private String Marca;
@@ -43,7 +43,11 @@ public class Vehiculo {
 	private String Patente;
 	
 	@Column(name = "Anio")
-	private Date Anio;
+	private String Anio;
+	
+	@ManyToOne
+	@JoinColumn(name = "idTransportista")
+	private Transportista transportista;
 	
 	
 	
@@ -68,19 +72,6 @@ public class Vehiculo {
 	public void setTipoVehiculo(TipoVehiculos tipoVehiculo) {
 		this.tipoVehiculo = tipoVehiculo;
 	}
-
-
-
-	public Transportista getTransportista() {
-		return transportista;
-	}
-
-
-
-	public void setTransportista(Transportista transportista) {
-		this.transportista = transportista;
-	}
-
 
 
 	public String getMarca() {
@@ -131,38 +122,54 @@ public class Vehiculo {
 
 
 
-	public Date getAnio() {
+	public String getAnio() {
 		return Anio;
 	}
 
 
 
-	public void setAnio(Date anio) {
+	public void setAnio(String anio) {
 		Anio = anio;
+	}
+
+
+
+
+
+
+
+	public Transportista getTransportista() {
+		return transportista;
+	}
+
+
+
+	public void setTransportista(Transportista transportista) {
+		this.transportista = transportista;
 	}
 
 
 
 	@Override
 	public String toString() {
-		return "Vehiculo [idVehiculo=" + idVehiculo + ", tipoVehiculo=" + tipoVehiculo + ", transportista="
-				+ transportista + ", Marca=" + Marca + ", Modelo=" + Modelo + ", Color=" + Color + ", Patente="
-				+ Patente + ", Anio=" + Anio + "]";
+		return "Vehiculo [idVehiculo=" + idVehiculo + ", tipoVehiculo=" + tipoVehiculo + ", Marca=" + Marca
+				+ ", Modelo=" + Modelo + ", Color=" + Color + ", Patente=" + Patente + ", Anio=" + Anio
+				+ ", transportista=" + transportista + "]";
 	}
 
 
 
-	public Vehiculo(Integer idVehiculo, TipoVehiculos tipoVehiculo, Transportista transportista, String marca,
-			String modelo, String color, String patente, Date anio) {
+	public Vehiculo(Integer idVehiculo, TipoVehiculos tipoVehiculo, String marca, String modelo, String color,
+			String patente, String anio, Transportista transportista) {
 		super();
 		this.idVehiculo = idVehiculo;
 		this.tipoVehiculo = tipoVehiculo;
-		this.transportista = transportista;
 		Marca = marca;
 		Modelo = modelo;
 		Color = color;
 		Patente = patente;
 		Anio = anio;
+		this.transportista = transportista;
 	}
 
 

@@ -5,7 +5,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Biblio 21</title>
+<title>Mittek</title>
 </head>
 <body>
 	<div class="container-fluid pt-4">
@@ -13,9 +13,8 @@
 		<%@ include file="/WEB-INF/views/menu1.jsp" %>
 		<div class="col-10">
 			<div class="row">
-				<div class="col-12">			
-					<input class="btn btn-primary btn-lg btn-block" type="submit" value="Registrar Envío"></input>
-					<input class="btn btn-primary btn-lg btn-block" type="submit" value="Postularse a Envío"></input>
+				<div class="col-12">
+					<h1 class= "d-flex justify-content-center alert alert-success text-body" role="alert">Bienvenido a Mittek</h2>
 				</div>
 			</div>
 		</div>

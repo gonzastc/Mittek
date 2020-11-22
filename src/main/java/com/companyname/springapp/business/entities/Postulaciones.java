@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name="postulaciones")
 
@@ -17,6 +19,7 @@ public class Postulaciones {
 	@Id
     @Column(name = "idPostulacion")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GenericGenerator(name = "native",strategy = "native")
 	private Integer idPostulacion;
 	
 	@ManyToOne

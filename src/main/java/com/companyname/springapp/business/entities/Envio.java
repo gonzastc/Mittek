@@ -1,5 +1,7 @@
 package com.companyname.springapp.business.entities;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name="envios")
 
@@ -20,6 +24,7 @@ public class Envio {
 	@Id
     @Column(name = "idEnvio")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GenericGenerator(name = "native",strategy = "native")
 	private Integer idEnvio;
 	
 	@ManyToOne
@@ -40,10 +45,10 @@ public class Envio {
 	private String estado;
 	
 	@Column(name = "Tarifa_minima")
-	private float tarifaMinima;
+	private Integer tarifaMinima;
 	
 	@Column(name = "Tarifa_maxima")
-	private float tarifaMaxima;
+	private Integer tarifaMaxima;
 	
 	@Column(name = "Fecha_entrega")
 	private Date fechaEntrega;
@@ -144,28 +149,28 @@ public class Envio {
 
 
 
-	public float getTarifaMinima() {
+	public Integer getTarifaMinima() {
 		return tarifaMinima;
 	}
 
 
 
 
-	public void setTarifaMinima(float tarifaMinima) {
+	public void setTarifaMinima(Integer tarifaMinima) {
 		this.tarifaMinima = tarifaMinima;
 	}
 
 
 
 
-	public float getTarifaMaxima() {
+	public Integer getTarifaMaxima() {
 		return tarifaMaxima;
 	}
 
 
 
 
-	public void setTarifaMaxima(float tarifaMaxima) {
+	public void setTarifaMaxima(Integer tarifaMaxima) {
 		this.tarifaMaxima = tarifaMaxima;
 	}
 
@@ -174,6 +179,12 @@ public class Envio {
 
 	public Date getFechaEntrega() {
 		return fechaEntrega;
+	}
+	
+	public String getFechaEntregaSH() {
+		Format f = new SimpleDateFormat("dd/MM/yyyy");
+	    String strDate = f.format(fechaEntrega);
+	    return strDate;
 	}
 
 
@@ -188,6 +199,12 @@ public class Envio {
 
 	public Date getMinimaOrigen() {
 		return minimaOrigen;
+	}
+	
+	public String getMinimaOrigenSH() {
+		Format f = new SimpleDateFormat("dd/MM/yyyy");
+	    String strDate = f.format(minimaOrigen);
+	    return strDate;
 	}
 
 
@@ -204,7 +221,11 @@ public class Envio {
 		return maximaOrigen;
 	}
 
-
+	public String getMaximaOrigenSH() {
+		Format f = new SimpleDateFormat("dd/MM/yyyy");
+	    String strDate = f.format(maximaOrigen);
+	    return strDate;
+	}
 
 
 	public void setMaximaOrigen(Date maximaOrigen) {
@@ -219,7 +240,11 @@ public class Envio {
 	}
 
 
-
+	public String getFechaLimiteTransportistaSH() {
+		Format f = new SimpleDateFormat("dd/MM/yyyy");
+	    String strDate = f.format(fechaLimiteTransportista);
+	    return strDate;
+	}
 
 	public void setFechaLimiteTransportista(Date fechaLimiteTransportista) {
 		this.fechaLimiteTransportista = fechaLimiteTransportista;
@@ -240,7 +265,7 @@ public class Envio {
 
 
 	public Envio(Integer idEnvio, Remitente remitente, Cargas carga, String origen, String destino, String estado,
-			float tarifaMinima, float tarifaMaxima, Date fechaEntrega, Date minimaOrigen, Date maximaOrigen,
+			Integer tarifaMinima, Integer tarifaMaxima, Date fechaEntrega, Date minimaOrigen, Date maximaOrigen,
 			Date fechaLimiteTransportista) {
 		super();
 		this.idEnvio = idEnvio;

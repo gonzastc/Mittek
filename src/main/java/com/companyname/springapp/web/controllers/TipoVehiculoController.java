@@ -14,4 +14,6 @@ public class TipoVehiculoController {
 
 	@Autowired
 	private TipoVehiculoManager tipoVehiculoManager;
+	
+	
 }
