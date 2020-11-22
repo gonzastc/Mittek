@@ -17,7 +17,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
-import com.companyname.springapp.business.entities.Prestamo;
+import com.companyname.springapp.business.entities.Envio;
 
 @Configuration
 @ComponentScan
@@ -43,7 +43,7 @@ public class SpringappBusinessConfig {
 
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         emf.setDataSource(dataSource());
-        emf.setPackagesToScan(Prestamo.class.getPackage().getName());
+        emf.setPackagesToScan(Envio.class.getPackage().getName());
         
         HibernateJpaVendorAdapter hibernateJpa = new HibernateJpaVendorAdapter();
         hibernateJpa.setDatabase(Database.MYSQL);
