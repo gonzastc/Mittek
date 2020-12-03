@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.companyname.springapp.business.entities.Envio;
 import com.companyname.springapp.business.entities.Postulaciones;
 import com.companyname.springapp.business.repositories.PostulacionesRepository;
 import com.companyname.springapp.business.services.*;
@@ -40,11 +41,17 @@ public class PostulacionesController {
 	@RequestMapping(value = "/postularEnvio", method = RequestMethod.POST)
 	public ModelAndView guardarPostulacion(@RequestParam Map<String,String> allParams) {
 		try {
+			Envio env = envioManager.getEnvioById(Integer.parseInt(allParams.get("envios")));
+			Integer tarifa = Integer.parseInt(allParams.get("tarifa")); 
+			if (tarifa < env.getTarifaMinima() ||
+				tarifa > env.getTarifaMaxima()) {
+				return new ModelAndView("modalTarifa");
+			}
 			Postulaciones nuevaPostulacion = new Postulaciones();
 			nuevaPostulacion.setTransportista(transportistaManager.getTransportistaById(Integer.parseInt(allParams.get("transportistas"))));
-			nuevaPostulacion.setEnvio(envioManager.getEnvioById(Integer.parseInt(allParams.get("envios"))));
+			nuevaPostulacion.setEnvio(env);
 			
-			Integer tarifa = Integer.parseInt(allParams.get("tarifa")); 
+			
 			nuevaPostulacion.setTarifa(tarifa);
 			
 			postulacionesManager.insertar(nuevaPostulacion);

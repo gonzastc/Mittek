@@ -41,7 +41,7 @@
 									<input name="largo" type="text" class="form-control"
 										placeholder="Ingrese el Largo de la Carga en CM" /> 
 									<input	name="peso" type="text" class="form-control"
-										placeholder="Ingrese el Peso de la Carga en CM" />
+										placeholder="Ingrese el Peso de la Carga en KG" />
 										</div>
 								</div>
 
