@@ -47,14 +47,51 @@ public class EnvioController {
 	@RequestMapping(value = "/registrarEnvio", method = RequestMethod.POST)
 	public ModelAndView guardarEnvio (@RequestParam Map<String,String> allParams) {
 		try {
-			Envio nuevoEnvio = new Envio();
+			Integer vAncho = (Integer.parseInt(allParams.get("ancho")));
+			Integer vAlto = (Integer.parseInt(allParams.get("alto")));
+			Integer vLargo = (Integer.parseInt(allParams.get("largo")));
+			Integer vPeso = (Integer.parseInt(allParams.get("peso")));
 			
+			if (vAncho > 260 || vAncho <= 0 ||
+				vAlto > 430 || vAlto <= 0 ||
+				vLargo > 3025 || vLargo <= 0 ||
+				vPeso > 26800 || vPeso <= 0) {
+				return new ModelAndView("modalCarga");
+			}
+			
+			Integer tarifaMinima = Integer.parseInt(allParams.get("Tarifa_minima"));
+			Integer tarifaMaxima = Integer.parseInt(allParams.get("Tarifa_maxima"));
+			
+			if (tarifaMinima <= 0 || tarifaMinima > tarifaMaxima
+				|| tarifaMaxima < tarifaMinima) {
+				return new ModelAndView("modalTarifa");
+			}
+			
+			SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+			Date fechaSistema = new Date();
+			String strDate = df.format(fechaSistema);
+			Date fechaEntrega = df.parse(allParams.get("fechaDeEntrega"));
+			Date fechaMinima = df.parse(allParams.get("fechaMinimaOrigen"));
+			Date fechaMaxima= df.parse(allParams.get("fechaMaximaOrigen"));
+			Date fechaTransportista= df.parse(allParams.get("fechaLimiteTransportista"));
+			
+			if (fechaEntrega.equals(strDate) ||
+			    fechaMinima.after(fechaEntrega) ||
+			    fechaMaxima.after(fechaEntrega) ||
+			    fechaMaxima.before(fechaMinima) ||
+			    fechaTransportista.after(fechaEntrega)||
+			    fechaTransportista.after(fechaMaxima))  {
+				return new ModelAndView("modalFechas");
+			}
+			Envio nuevoEnvio = new Envio();
+
 			Cargas nuevaCarga = new Cargas();
 			
-			nuevaCarga.setAlto((Integer.parseInt(allParams.get("alto"))));
-			nuevaCarga.setAncho((Integer.parseInt(allParams.get("ancho"))));
-			nuevaCarga.setLargo((Integer.parseInt(allParams.get("largo"))));
-			nuevaCarga.setPeso((Integer.parseInt(allParams.get("peso"))));
+			
+			nuevaCarga.setAlto(vAlto);
+			nuevaCarga.setAncho(vAncho);
+			nuevaCarga.setLargo(vLargo);
+			nuevaCarga.setPeso(vPeso);
 			
 			nuevoEnvio.setRemitente(remitenteManager.getRemitenteById(Integer.parseInt(allParams.get("remitentes"))));
 			nuevoEnvio.setCarga(nuevaCarga);
@@ -64,32 +101,28 @@ public class EnvioController {
 			nuevoEnvio.setEstado("Nuevo");
 			
 		
-		  Integer tarifaMinima = Integer.parseInt(allParams.get("Tarifa_minima")); 
-		  nuevoEnvio.setTarifaMinima(tarifaMinima); 
+			 
+			nuevoEnvio.setTarifaMinima(tarifaMinima); 
 			  
-		  Integer tarifaMaxima = Integer.parseInt(allParams.get("Tarifa_maxima")); 		 
-		  nuevoEnvio.setTarifaMaxima(tarifaMaxima);
+		  	 		 
+		  	nuevoEnvio.setTarifaMaxima(tarifaMaxima);
 			
-			SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+			
 			
 
 			
-			Date fechaEntrega;
-			fechaEntrega = df.parse(allParams.get("fechaDeEntrega"));
+			
 			nuevoEnvio.setFechaEntrega(fechaEntrega);
 
-			Date fechaMinima;
-			fechaMinima = df.parse(allParams.get("fechaMinimaOrigen"));
+			
 			nuevoEnvio.setMinimaOrigen(fechaMinima);
 			
 			//Fecha Máxima Origen
-			Date fechaMaxima;
-			fechaMaxima = df.parse(allParams.get("fechaMaximaOrigen"));
+			
 			nuevoEnvio.setMaximaOrigen(fechaMaxima);
 			
 			//Fecha Límite Transportista
-			Date fechaTransportista;
-			fechaTransportista = df.parse(allParams.get("fechaLimiteTransportista"));
+			
 			nuevoEnvio.setFechaLimiteTransportista(fechaTransportista);
 			
 			

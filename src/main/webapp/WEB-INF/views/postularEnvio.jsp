@@ -27,7 +27,7 @@
 		<label>Envio</label>  
 	      <select class="form-control" name="envios">
 			<c:forEach items="${model.envios}" var="envios">
-				<option value=${envios.idEnvio}>Origen: ${envios.origen}. Destino: ${envios.destino}.</option>
+				<option value=${envios.idEnvio}>Origen: ${envios.origen}. Destino: ${envios.destino}. Fecha Entrega: ${envios.getFechaEntregaSH()}.</option>
 			</c:forEach>
 		</select>
 		<div class="form-group col-md-12">
