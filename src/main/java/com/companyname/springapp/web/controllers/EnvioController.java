@@ -125,6 +125,9 @@ public class EnvioController {
 			
 			nuevoEnvio.setFechaLimiteTransportista(fechaTransportista);
 			
+			if (nuevoEnvio.getOrigen().equals("")|| nuevoEnvio.getDestino().equals("")) {
+				return new ModelAndView("modalOrigenDestino");
+			}
 			
 			
 			//Finalmente usamos el servicio insertar
